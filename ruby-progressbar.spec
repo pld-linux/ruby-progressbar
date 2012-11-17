@@ -1,12 +1,13 @@
 %define pkgname progressbar
 Summary:	Text progress bar library for Ruby
+Summary(pl.UTF-8):	Biblioteka tekstowego paska postępu dla języka Ruby
 Name:		ruby-%{pkgname}
 Version:	0.9.1
 Release:	1
 License:	Ruby License
+Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	4ca56a4052fbfdaeebae15f3525c4178
-Group:		Development/Languages
 URL:		https://github.com/peleteiro/progressbar
 BuildRequires:	rpmbuild(macros) >= 1.484
 BuildRequires:	ruby >= 1:1.8.6
@@ -20,13 +21,18 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_enable_debug_packages	0
 
 %description
-Ruby/ProgressBar is a text progress bar library for Ruby.
-It can indicate progress with percentage, a progress bar,
-and estimated remaining time.
+Ruby/ProgressBar is a text progress bar library for Ruby. It can
+indicate progress with percentage, a progress bar, and estimated
+remaining time.
+
+%description -l pl.UTF-8
+Ruby/ProgressBar to biblioteka tekstowego paska postępu dla języka
+Ruby. Potrafi podawać postęp przy użyciu procentów, paska postępu
+oraz estymacji czasu pozostałego do zakończenia.
 
 %package rdoc
 Summary:	HTML documentation for %{pkgname}
-Summary(pl.UTF-8):	Dokumentacja w formacie HTML dla %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie HTML do biblioteki %{pkgname}
 Group:		Documentation
 Requires:	ruby >= 1:1.8.7-4
 
@@ -34,11 +40,11 @@ Requires:	ruby >= 1:1.8.7-4
 HTML documentation for %{pkgname}.
 
 %description rdoc -l pl.UTF-8
-Dokumentacja w formacie HTML dla %{pkgname}.
+Dokumentacja w formacie HTML do biblioteki %{pkgname}.
 
 %package ri
 Summary:	ri documentation for %{pkgname}
-Summary(pl.UTF-8):	Dokumentacja w formacie ri dla %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie ri do biblioteki %{pkgname}
 Group:		Documentation
 Requires:	ruby
 
@@ -46,7 +52,7 @@ Requires:	ruby
 ri documentation for %{pkgname}.
 
 %description ri -l pl.UTF-8
-Dokumentacji w formacie ri dla %{pkgname}.
+Dokumentacja w formacie ri do biblioteki %{pkgname}.
 
 %prep
 %setup -q -c
@@ -65,7 +71,7 @@ cp %{_datadir}/setup.rb .
 
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
-rm ri/created.rid
+%{__rm} ri/created.rid
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -73,8 +79,9 @@ install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
 %{__ruby} setup.rb install \
 	--prefix=$RPM_BUILD_ROOT
 
-cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
+cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
+%{__rm} $RPM_BUILD_ROOT%{ruby_ridir}/cache.ri
 
 %clean
 rm -rf $RPM_BUILD_ROOT
