@@ -2,12 +2,12 @@
 Summary:	Text progress bar library for Ruby
 Summary(pl.UTF-8):	Biblioteka tekstowego paska postępu dla języka Ruby
 Name:		ruby-%{pkgname}
-Version:	0.9.1
+Version:	0.11.0
 Release:	1
 License:	Ruby License
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	4ca56a4052fbfdaeebae15f3525c4178
+# Source0-md5:	b0aeb7f9bb4b6c5562582a009132c285
 URL:		https://github.com/peleteiro/progressbar
 BuildRequires:	rpmbuild(macros) >= 1.484
 BuildRequires:	ruby >= 1:1.8.6
@@ -59,7 +59,7 @@ Dokumentacja w formacie ri do biblioteki %{pkgname}.
 
 # gem install
 %{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
-find -newer README.rd -o -print | xargs touch --reference %{SOURCE0}
+find -newer README.rdoc -o -print | xargs touch --reference %{SOURCE0}
 
 %build
 cp %{_datadir}/setup.rb .
@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README.rd
+%doc ChangeLog README.rdoc
 %{ruby_rubylibdir}/%{pkgname}.rb
 
 %files rdoc
