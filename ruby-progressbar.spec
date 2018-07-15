@@ -2,12 +2,12 @@
 Summary:	Text progress bar library for Ruby
 Summary(pl.UTF-8):	Biblioteka tekstowego paska postępu dla języka Ruby
 Name:		ruby-%{pkgname}
-Version:	0.11.0
-Release:	3
+Version:	1.9.0
+Release:	1
 License:	Ruby License
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	b0aeb7f9bb4b6c5562582a009132c285
+# Source0-md5:	0cbd6df79d4fa4955da1ea738951e4df
 URL:		https://github.com/peleteiro/progressbar
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
@@ -69,8 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README.rdoc
+%doc README.md
 %{ruby_vendorlibdir}/progressbar.rb
+%{ruby_vendorlibdir}/ruby-progressbar
 
 %files rdoc
 %defattr(644,root,root,755)
@@ -79,4 +80,3 @@ rm -rf $RPM_BUILD_ROOT
 %files ri
 %defattr(644,root,root,755)
 %{ruby_ridir}/ProgressBar
-%{ruby_ridir}/ReversedProgressBar
