@@ -3,7 +3,7 @@ Summary:	Text progress bar library for Ruby
 Summary(pl.UTF-8):	Biblioteka tekstowego paska postępu dla języka Ruby
 Name:		ruby-%{pkgname}
 Version:	1.9.0
-Release:	1
+Release:	2
 License:	Ruby License
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
