@@ -2,13 +2,13 @@
 Summary:	Text progress bar library for Ruby
 Summary(pl.UTF-8):	Biblioteka tekstowego paska postępu dla języka Ruby
 Name:		ruby-%{pkgname}
-Version:	1.9.0
-Release:	2
-License:	Ruby License
+Version:	1.13.0
+Release:	1
+License:	MIT
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	0cbd6df79d4fa4955da1ea738951e4df
-URL:		https://github.com/peleteiro/progressbar
+# Source0-md5:	26581f1d89f9c701d6ca06654c7ab52c
+URL:		https://github.com/jfelchner/ruby-progressbar
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
 BuildArch:	noarch
@@ -52,6 +52,9 @@ Dokumentacja w formacie ri do biblioteki %{pkgname}.
 %setup -q -n %{pkgname}-%{version}
 
 %build
+# write .gemspec
+%__gem_helper spec
+
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
 %{__rm} ri/created.rid
@@ -59,19 +62,21 @@ rdoc --op rdoc lib
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_ridir},%{ruby_rdocdir}}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir},%{ruby_ridir},%{ruby_rdocdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md
+%doc README.md LICENSE.txt
 %{ruby_vendorlibdir}/progressbar.rb
 %{ruby_vendorlibdir}/ruby-progressbar
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files rdoc
 %defattr(644,root,root,755)
